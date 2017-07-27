@@ -2,6 +2,19 @@
 
 > A gulp project
 
+## Directory Structure
+```
+ src 
+ |__ fonts
+ |__ html 
+ |__ less
+ |__ js
+
+ dist   
+
+```
+
+
 ## Build Setup
 
 ``` bash
