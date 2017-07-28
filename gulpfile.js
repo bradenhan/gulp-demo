@@ -8,9 +8,7 @@ var gulp = require('gulp'),
     watchPath = require('gulp-watch-path'),  
     combiner = require('stream-combiner2'),
     less = require('gulp-less'),
-    htmlminify = require("gulp-html-minify"),
-    LessAutoprefix = require('less-plugin-autoprefix'),
-    autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] }),
+    htmlminify = require("gulp-html-minify"),  
     path = require('path');
 
 // 新建代码着色与显示错误日志方法，这个方法用到了gulp-util和stream-combiner2插件
@@ -25,8 +23,7 @@ var handleError=function(err){
 // less 转换
 gulp.task('less', function () {
   return gulp.src('src/less/*.less')
-    .pipe(less({
-      //plugins: [autoprefix],
+    .pipe(less({ 
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(gulp.dest('src/css')); 
@@ -55,7 +52,7 @@ gulp.task('compress', function (cb) {
     var destJsPath='dist/js/';   
     pump([
         gulp.src(srcJsPath), //获取文件源地址 
-        uglify(), //执行压缩 
+       // uglify(), //执行压缩-暂时不压缩
         gulp.dest(destJsPath) //将压缩的文件发布到新路径  
     ],
     cb
@@ -79,7 +76,7 @@ gulp.task('watchjs',function(){
         //获取错误信息，继续执行代码  
         var combined = combiner.obj([  
                 gulp.src(paths.srcPath),  
-                uglify(),  
+                // uglify(),   //执行压缩-暂时不压缩
                 gulp.dest(paths.distDir)  
             ]);  
         combined.on('error', handleError);  
