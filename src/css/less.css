@@ -2,9 +2,10 @@ body {
   color: #fff;
   width: 600px;
   font-size: 50px;
-  line-height: 800px;
-  height: 1800px;
+  line-height: 80px;
+  height: 20px;
   display: flex;
+  background: #333;
 }
 body .a {
   -webkit-border-radius: 10px;
@@ -21,4 +22,7 @@ body .a {
   filter: alpha(opacity=100);
   -webkit-appearance: button;
   appearance: button;
+}
+body .sfasd {
+  height: 200px;
 }
