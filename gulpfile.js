@@ -1,13 +1,14 @@
 // 引入插件变量
 var gulp = require('gulp'),  
     uglify = require('gulp-uglify'),  
-    pump = require('pump'),
-    minifycss = require('gulp-minify-css'),  
-    imgmin = require('gulp-imagemin'),  
+    pump = require('pump'), 
+    cleanCSS = require('gulp-clean-css'),
+    imagemin = require('gulp-imagemin'),  
     gutil = require('gulp-util'),  
     watchPath = require('gulp-watch-path'),  
     combiner = require('stream-combiner2'),
     less = require('gulp-less'),
+    htmlminify = require("gulp-html-minify"),
     LessAutoprefix = require('less-plugin-autoprefix'),
     autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] }),
     path = require('path');
@@ -23,32 +24,55 @@ var handleError=function(err){
 
 // less 转换
 gulp.task('less', function () {
-  return gulp.src('less/*.less')
+  return gulp.src('src/less/*.less')
     .pipe(less({
-      plugins: [autoprefix],
+      //plugins: [autoprefix],
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
-    .pipe(gulp.dest('dist/css')); 
+    .pipe(gulp.dest('src/css')); 
+});
+
+// 压缩 CSS   
+gulp.task('minify-css' , function(){ 
+    return gulp.src('src/css/*.css')
+        .pipe(cleanCSS({debug: true}, function(details) {
+            console.log(details.name + ': ' + details.stats.originalSize);
+            console.log(details.name + ': ' + details.stats.minifiedSize);
+        }))
+    .pipe(gulp.dest('dist/css'));
+});
+
+gulp.task('build-html' , function(){
+    return gulp.src("src/html/*.html")
+        // .pipe(htmlminify()) 暂时不压缩html
+        .pipe(gulp.dest("dist/html"))
 });
 
 // 新建js批量压缩任务  
 gulp.task('compress', function (cb) {
     //将文件的源路径和发布路径赋值给相应变量  
-    var srcJsPath='js/*.js';  
+    var srcJsPath='src/js/*.js';  
     var destJsPath='dist/js/';   
     pump([
         gulp.src(srcJsPath), //获取文件源地址 
-        // uglify(), //执行压缩 
+        uglify(), //执行压缩 
         gulp.dest(destJsPath) //将压缩的文件发布到新路径  
     ],
     cb
   );
-});
+}); 
 
+//图片压缩
+gulp.task('images', function () {
+  return gulp.src('src/images/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('dist/images'))
+});
+ 
 // 编写default任务和监听任务
 gulp.task('watchjs',function(){  
-    gulp.watch('js/*.js',function(event){  
-    var paths=watchPath(event,'js/','dist/js/');  
+    gulp.watch('src/js/*.js',function(event){  
+    var paths=watchPath(event,'src/js/','dist/js/');  
         //打印修改类型和路径  
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);  
         gutil.log('Dist: ' + paths.distPath);  
@@ -62,18 +86,23 @@ gulp.task('watchjs',function(){
     });  
 });  
 
-// 编写default任务和监听任务
-gulp.task('default',function(){  
-    //默认执行的方法，引号内的内容对应上面task写的内容  
-    gulp.run('watchjs','less','css','images');  
+gulp.task('watch', function () {
+    //监控 html  
+    gulp.watch('src/html/*.html',['build-html']); 
     //监控js  
-    gulp.watch('js/*.js',['watchjs']);  
+    gulp.watch('src/js/*.js',['watchjs']);  
     //监控less  
-    gulp.watch('less/*.less',['less']);  
-    //监控css  
-    gulp.watch('css/*.css',['css']);  
+    gulp.watch('src/less/*.less',['less']); 
+    //监控 CSS  
+    gulp.watch('src/css/*.css',['minify-css']); 
     //监控img  
-    gulp.watch('images/*.*',['images']);  
+    gulp.watch('src/images/*.*',['images']);  
+});
+
+
+// 编写default任务和监听任务
+gulp.task('default',['watchjs' , 'less', 'images','minify-css','watch','build-html'],function(){   
+   
 });  
 
 // 将本文件夹下的文件发布到其他盘 
