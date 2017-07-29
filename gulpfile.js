@@ -10,7 +10,9 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     htmlminify = require("gulp-html-minify"),
     path = require('path'),
-    connect = require('gulp-connect'),
+    connect = require('gulp-connect'), 
+    htmlInsert = require('gulp-html-build').htmlInsert,
+    htmlRename = require('gulp-html-build').htmlRename,
     livereload = require('gulp-livereload');
 
 // 新建代码着色与显示错误日志方法，这个方法用到了gulp-util和stream-combiner2插件
@@ -43,13 +45,13 @@ gulp.task('minify-css', function () {
         .pipe(livereload());
 });
 
-// 生成html
-gulp.task('build-html', function () {
-    return gulp.src("src/html/*.html")
-        // .pipe(htmlminify()) 暂时不压缩html
-        .pipe(gulp.dest("dist/html"))
-        .pipe(livereload());
-});
+// 模块化引用html
+gulp.task('insert',function() {
+  return gulp.src('src/html/*.html')
+    .pipe(htmlInsert({src:"src/html/include/"}))    
+    .pipe(gulp.dest('dist/html'))
+    .pipe(livereload());
+});  
 
 // 新建js批量压缩任务  
 gulp.task('compress', function (cb) {
@@ -88,13 +90,13 @@ gulp.task('watchjs', function () {
         ]);
         combined.on('error', handleError);
     });
-});
+}); 
 
 // 监控
 gulp.task('watch', function () {
     livereload.listen();
     //监控 html  
-    gulp.watch('src/html/*.html', ['build-html']);
+    gulp.watch('src/**/*.html', ['insert']);
     //监控js  
     gulp.watch('src/js/*.js', ['watchjs']);
     //监控less  
@@ -123,19 +125,19 @@ gulp.task('connectDist', function () {
         port: 8001,
         livereload: true
     });
-});
-
+}); 
 
 // 编写default任务和监听任务
-gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch', 'build-html', 'connectDev', 'connectDist'], function () {
-
+gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch','insert', 'connectDev', 'connectDist'], function () {
+ return gulp.src('dist/html/*.html')
+    .pipe(htmlRename());
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
 //注意src的参数   
-gulp.task('copy', function () {
+/* gulp.task('copy', function () {
     var destDir = "目标路径"
     return gulp.src('./src/*,./dist', {base: '.'})
         .pipe(gulp.dest(destDir))
-});
+}); */
  
