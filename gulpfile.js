@@ -12,7 +12,8 @@ var gulp = require('gulp'),
     path = require('path'),
     connect = require('gulp-connect'), 
     htmlInsert = require('gulp-html-build').htmlInsert,
-    htmlRename = require('gulp-html-build').htmlRename,
+    htmlRename = require('gulp-html-build').htmlRename, 
+    spritesmith = require('gulp.spritesmith'),
     livereload = require('gulp-livereload');
 
 // 新建代码着色与显示错误日志方法，这个方法用到了gulp-util和stream-combiner2插件
@@ -22,7 +23,7 @@ var handleError = function (err) {
     gutil.log('lineNumber: ' + gutil.colors.red(err.lineNumber));
     gutil.log('message: ' + err.message);
     gutil.log('plugin: ' + gutil.colors.yellow(err.plugin));
-};
+}; 
 
 // less 转换
 gulp.task('less', function () {
@@ -92,6 +93,15 @@ gulp.task('watchjs', function () {
     });
 }); 
 
+// CSS sprite 设置
+// gulp.task('sprite', function () {
+//   var spriteData = gulp.src('src/less/background/*.png').pipe(spritesmith({
+//     imgName: 'sprite.png',
+//     cssName: 'sprite.css'
+//   }));
+//   return spriteData.pipe(gulp.dest('dist/css/background/'));
+// });  
+
 // 监控
 gulp.task('watch', function () {
     livereload.listen();
@@ -105,7 +115,7 @@ gulp.task('watch', function () {
     gulp.watch('src/css/*.css', ['minify-css']);
     //监控img  
     gulp.watch('src/images/*.*', ['images']);
-});
+}); 
 
 // 监测测试地址
 gulp.task('connectDev', function () {
@@ -128,7 +138,7 @@ gulp.task('connectDist', function () {
 }); 
 
 // 编写default任务和监听任务
-gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch','insert', 'connectDev', 'connectDist'], function () {
+gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch','insert', 'sprite' ,'connectDev', 'connectDist'], function () {
  return gulp.src('dist/html/*.html')
     .pipe(htmlRename());
 });
