@@ -10,9 +10,9 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     htmlminify = require("gulp-html-minify"),
     path = require('path'),
-    connect = require('gulp-connect'), 
+    connect = require('gulp-connect'),
     htmlInsert = require('gulp-html-build').htmlInsert,
-    htmlRename = require('gulp-html-build').htmlRename, 
+    htmlRename = require('gulp-html-build').htmlRename,
     spritesmith = require('gulp.spritesmith'),
     livereload = require('gulp-livereload');
 
@@ -23,7 +23,7 @@ var handleError = function (err) {
     gutil.log('lineNumber: ' + gutil.colors.red(err.lineNumber));
     gutil.log('message: ' + err.message);
     gutil.log('plugin: ' + gutil.colors.yellow(err.plugin));
-}; 
+};
 
 // less 转换
 gulp.task('less', function () {
@@ -47,12 +47,12 @@ gulp.task('minify-css', function () {
 });
 
 // 模块化引用html
-gulp.task('insert',function() {
-  return gulp.src('src/html/*.html')
-    .pipe(htmlInsert({src:"src/html/include/"}))    
-    .pipe(gulp.dest('dist/html'))
-    .pipe(livereload());
-});  
+gulp.task('insert', function () {
+    return gulp.src('src/html/*.html')
+        .pipe(htmlInsert({ src: "src/html/include/" }))
+        .pipe(gulp.dest('dist/html'))
+        .pipe(livereload());
+});
 
 // 新建js批量压缩任务  
 gulp.task('compress', function (cb) {
@@ -91,7 +91,7 @@ gulp.task('watchjs', function () {
         ]);
         combined.on('error', handleError);
     });
-}); 
+});
 
 // CSS sprite 设置
 // gulp.task('sprite', function () {
@@ -106,7 +106,7 @@ gulp.task('watchjs', function () {
 gulp.task('watch', function () {
     livereload.listen();
     //监控 html  
-    gulp.watch('src/**/*.html', ['insert']);
+    gulp.watch('src/**/*', ['insert']);
     //监控js  
     gulp.watch('src/js/*.js', ['watchjs']);
     //监控less  
@@ -115,7 +115,7 @@ gulp.task('watch', function () {
     gulp.watch('src/css/*.css', ['minify-css']);
     //监控img  
     gulp.watch('src/images/*.*', ['images']);
-}); 
+});
 
 // 监测测试地址
 gulp.task('connectDev', function () {
@@ -135,12 +135,12 @@ gulp.task('connectDist', function () {
         port: 8001,
         livereload: true
     });
-}); 
+});
 
 // 编写default任务和监听任务
-gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch','insert', 'sprite' ,'connectDev', 'connectDist'], function () {
- return gulp.src('dist/html/*.html')
-    .pipe(htmlRename());
+gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch', 'insert', 'connectDev', 'connectDist'], function () {
+    return gulp.src('dist/html/*.html')
+        .pipe(htmlRename());
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
@@ -150,4 +150,3 @@ gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch','insert
     return gulp.src('./src/*,./dist', {base: '.'})
         .pipe(gulp.dest(destDir))
 }); */
- 
