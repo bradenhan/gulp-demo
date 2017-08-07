@@ -14,7 +14,8 @@ var gulp = require('gulp'),
     htmlInsert = require('gulp-html-build').htmlInsert,
     htmlRename = require('gulp-html-build').htmlRename,
     spritesmith = require('gulp.spritesmith'),
-    livereload = require('gulp-livereload');
+    livereload = require('gulp-livereload'),
+    cssBase64 = require('gulp-css-base64');
 
     var Asset = { 
         origin : {
@@ -46,6 +47,7 @@ gulp.task('less', function () {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
+        .pipe(cssBase64())
         .pipe(gulp.dest('dist/css'))
         .pipe(livereload({start : true}));
 }); 
@@ -137,7 +139,7 @@ gulp.task('connectDist', function () {
 // 编写default任务和监听任务
 gulp.task('default', ['watch','connectDist'], function () {
     return gulp.src('dist/html/*.html')
-        .pipe(htmlRename());
+        .pipe(htmlRename()); 
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
