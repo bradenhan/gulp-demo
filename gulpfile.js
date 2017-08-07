@@ -16,6 +16,17 @@ var gulp = require('gulp'),
     spritesmith = require('gulp.spritesmith'),
     livereload = require('gulp-livereload');
 
+    var Asset = { 
+        origin : {
+            all: 'src/**/*.*',
+            js: 'src/js/*.js',
+            less: 'src/less/*.less',
+            html : 'src/html/*.html',
+            css : 'src/css/*.css' ,
+            images : 'src/images/*.*' 
+        } 
+    };
+
 // 新建代码着色与显示错误日志方法，这个方法用到了gulp-util和stream-combiner2插件
 var handleError = function (err) {
     console.log('\n');
@@ -25,39 +36,33 @@ var handleError = function (err) {
     gutil.log('plugin: ' + gutil.colors.yellow(err.plugin));
 };
 
-// less 转换
+// less 转换 、压缩 CSS 
 gulp.task('less', function () {
-    return gulp.src('src/less/*.less')
+    return gulp.src(Asset.origin.less)
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
-        .pipe(gulp.dest('src/css'))
-        .pipe(livereload());
-});
-
-// 压缩 CSS   
-gulp.task('minify-css', function () {
-    return gulp.src('src/css/*.css')
         .pipe(cleanCSS({ debug: true }, function (details) {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
         .pipe(gulp.dest('dist/css'))
-        .pipe(livereload());
-});
+        .pipe(livereload({start : true}));
+}); 
+ 
 
 // 模块化引用html
 gulp.task('insert', function () {
-    return gulp.src('src/html/*.html')
+    return gulp.src(Asset.origin.html)
         .pipe(htmlInsert({ src: "src/html/include/" }))
         .pipe(gulp.dest('dist/html'))
-        .pipe(livereload());
+        .pipe(livereload({start : true}));
 });
 
 // 新建js批量压缩任务  
 gulp.task('compress', function (cb) {
     //将文件的源路径和发布路径赋值给相应变量  
-    var srcJsPath = 'src/js/*.js';
+    var srcJsPath = Asset.origin.js;
     var destJsPath = 'dist/js/';
     pump([
         gulp.src(srcJsPath), //获取文件源地址 
@@ -73,7 +78,7 @@ gulp.task('images', function () {
     return gulp.src('src/images/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/images'))
-        .pipe(livereload());
+        .pipe(livereload({start : true}));  
 });
 
 // 编写default任务和监听任务
@@ -104,41 +109,33 @@ gulp.task('watchjs', function () {
 
 // 监控
 gulp.task('watch', function () {
-    livereload.listen();
     //监控 html  
-    gulp.watch('src/**/*', ['insert']);
-    //监控js  
-    gulp.watch('src/js/*.js', ['watchjs']);
-    //监控less  
-    gulp.watch('src/less/*.less', ['less']);
-    //监控 CSS  
-    gulp.watch('src/css/*.css', ['minify-css']);
-    //监控img  
-    gulp.watch('src/images/*.*', ['images']);
-});
+    gulp.watch(Asset.origin.all, ['insert']);
 
-// 监测测试地址
-gulp.task('connectDev', function () {
-    connect.server({
-        name: 'Dev App',
-        root: ['src'],
-        port: 8000,
-        livereload: true
-    });
-});
+    //监控js  
+    gulp.watch(Asset.origin.js, ['watchjs']);
+
+    //监控less  
+    gulp.watch(Asset.origin.less, ['less']); 
+
+    //监控img  
+    gulp.watch(Asset.origin.images, ['images']);
+
+    livereload.listen({start: true});
+});  
 
 // 监测正式地址
 gulp.task('connectDist', function () {
     connect.server({
         name: 'Dist App',
         root: 'dist',
-        port: 8001,
+        port: 8001, 
         livereload: true
     });
 });
 
 // 编写default任务和监听任务
-gulp.task('default', ['watchjs', 'less', 'images', 'minify-css', 'watch', 'insert', 'connectDev', 'connectDist'], function () {
+gulp.task('default', ['watch','connectDist'], function () {
     return gulp.src('dist/html/*.html')
         .pipe(htmlRename());
 });
