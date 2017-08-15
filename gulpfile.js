@@ -42,12 +42,13 @@ gulp.task('less', function () {
     return gulp.src(Asset.origin.less)
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
-        }))
+        })) 
+        .pipe(cssBase64())
+        .pipe(gulp.dest('src/css'))
         .pipe(cleanCSS({ debug: true }, function (details) {
             console.log(details.name + ': ' + details.stats.originalSize);
             console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
-        .pipe(cssBase64())
         .pipe(gulp.dest('dist/css'))
         .pipe(livereload({start : true}));
 }); 
@@ -127,6 +128,16 @@ gulp.task('watch', function () {
 });  
 
 // 监测正式地址
+gulp.task('connectDev', function () {
+    connect.server({
+        name: 'src App',
+        root: 'src',
+        port: 8000, 
+        livereload: true
+    });
+});
+
+// 监测正式地址
 gulp.task('connectDist', function () {
     connect.server({
         name: 'Dist App',
@@ -137,15 +148,15 @@ gulp.task('connectDist', function () {
 });
 
 // 编写default任务和监听任务
-gulp.task('default', ['watch','connectDist'], function () {
+gulp.task('default', ['watch','connectDist','connectDev'], function () {
     return gulp.src('dist/html/*.html')
         .pipe(htmlRename()); 
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
 //注意src的参数   
-/* gulp.task('copy', function () {
-    var destDir = "目标路径"
-    return gulp.src('./src/*,./dist', {base: '.'})
+ gulp.task('copy', function () {
+    var destDir = "";
+    return gulp.src('./*', {base: '.'})
         .pipe(gulp.dest(destDir))
-}); */
+}); 
