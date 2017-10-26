@@ -21,8 +21,8 @@ var gulp = require('gulp'),
         origin : {
             all: 'src/**/*.*',
             js: 'src/js/*.js',
-            less: 'src/less/*.less',
-            html : 'src/html/*.html',
+            less: ['src/less/*.less','src/less/*/*.less'],
+            html : ['src/html/*.html','src/html/*/*.html'],
             css : 'src/css/*.css' ,
             images : 'src/images/*.*' 
         } 
