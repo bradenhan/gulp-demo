@@ -1,3 +1,5 @@
-$('.as').on('click',function(){
-    console.log('ssassss');
+/*global document: false */
+
+$(document).ready(function() { 
+	console.log('dsf是法国尚弟分'); 
 });

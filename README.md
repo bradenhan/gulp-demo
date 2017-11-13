@@ -1,6 +1,6 @@
 # gulp-demo
 
-> 一个基于gulp的前端框架，包含html模块化、Less支持、JS压缩等功能。
+> 一个基于gulp的前端框架，包含html模块化压缩、Less支持、JS压缩、清除缓存等功能。
 
 ## Directory Structure
 ```
