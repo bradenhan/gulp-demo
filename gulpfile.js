@@ -15,7 +15,11 @@ var gulp = require('gulp'),
     htmlRename = require('gulp-html-build').htmlRename,
     spritesmith = require('gulp.spritesmith'),
     livereload = require('gulp-livereload'),
-    cssBase64 = require('gulp-css-base64');
+    cssBase64 = require('gulp-css-base64'),
+    jslint = require('gulp-jslint-simple'),
+    lesshint = require('gulp-lesshint'),
+    noop = function () {},
+    stylish = require('gulp-lesshint-stylish');
 
     var Asset = { 
         origin : {
@@ -43,6 +47,9 @@ gulp.task('less', function () {
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         })) 
+        .pipe(lesshint())      // enforce style guide 
+        .on('error', noop) // don't stop on error 
+        .pipe(stylish())  // log style errors 
         .pipe(cssBase64())
         .pipe(gulp.dest('src/css'))
         .pipe(cleanCSS({ debug: true }, function (details) {
@@ -60,6 +67,21 @@ gulp.task('insert', function () {
         .pipe(htmlInsert({ src: "src/html/include/" }))
         .pipe(gulp.dest('dist/html'))
         .pipe(livereload({start : true}));
+});
+
+// JS 文件错误检查
+gulp.task('lint', function () {
+    var srcJsPath = Asset.origin.js;
+    gulp.src(srcJsPath)
+        .pipe(jslint.run({
+            // project-wide JSLint options 
+            node: true,
+            vars: true
+        }))
+        .pipe(jslint.report({
+            // example of using a JSHint reporter 
+            reporter: require('jshint-stylish').reporter
+        }));
 });
 
 // 新建js批量压缩任务  

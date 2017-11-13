@@ -24,7 +24,10 @@
     "gulp-html-build": "^1.2.0",
     "gulp-html-minify": "0.0.14",
     "gulp-imagemin": "^3.3.0",
+    "gulp-jslint-simple": "^1.0.2",
     "gulp-less": "^3.3.2",
+    "gulp-lesshint": "^4.0.0",
+    "gulp-lesshint-stylish": "^1.0.0",
     "gulp-livereload": "^3.8.1",
     "gulp-refresh": "^1.1.0",
     "gulp-uglify": "^3.0.0",
@@ -32,6 +35,7 @@
     "gulp-watch-path": "^0.1.0",
     "gulp-webserver": "^0.9.1",
     "gulp.spritesmith": "^6.5.1",
+    "lesshint-reporter-stylisher": "^1.0.0",
     "pump": "^1.0.2",
     "stream-combiner2": "^1.1.1"
   },

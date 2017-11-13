@@ -10,6 +10,9 @@
     |__include // 公共部分，可以页面中引用
  |__ less
  |__ js 
+ gulpfile.js // Gulp主文件
+ package.json // 配置文件
+ README.md // 项目说明文件
 
 ```
 
