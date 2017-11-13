@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bradenhan/gulp-demo.git"
+    "url": "git+https://github.com/bradenhan/gulp-frontEnd-demo.git"
   },
   "author": "bradenhan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bradenhan/gulp-demo/issues"
+    "url": "https://github.com/bradenhan/gulp-frontEnd-demo/issues"
   },
-  "homepage": "https://github.com/bradenhan/gulp-demo#readme",
+  "homepage": "https://github.com/bradenhan/gulp-frontEnd-demo#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.7.0",

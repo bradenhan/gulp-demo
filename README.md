@@ -9,9 +9,7 @@
  |__ html 
     |__include // 公共部分，可以页面中引用
  |__ less
- |__ js
-
- dist   
+ |__ js 
 
 ```
 
