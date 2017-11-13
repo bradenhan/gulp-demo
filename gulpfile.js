@@ -45,7 +45,7 @@ gulp.task('less', function() {
         .pipe(cache('linting'))
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
-        }))
+        })) 
         .pipe(cssBase64())
         .pipe(gulp.dest('src/css'))
         .pipe(cleanCSS({

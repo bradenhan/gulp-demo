@@ -66,7 +66,7 @@ em {
   visibility: hidden;
   font-size: 0;
 }
-a {
+.part {
   color: #fff;
 }
 body {
@@ -76,4 +76,5 @@ body {
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
   background-clip: padding-box;
+  background: url(images/add.png) no-repeat;
 }
