@@ -17,7 +17,9 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     cssBase64 = require('gulp-css-base64'),
     eslint = require('gulp-eslint'),
-    cache = require('gulp-cached');
+    cache = require('gulp-cached'),
+
+    w3cjs = require('gulp-w3cjs');
 
 var Asset = {
     origin: {
@@ -45,7 +47,7 @@ gulp.task('less', function() {
         .pipe(cache('linting'))
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
-        })) 
+        }))
         .pipe(cssBase64())
         .pipe(gulp.dest('src/css'))
         .pipe(cleanCSS({
@@ -58,19 +60,25 @@ gulp.task('less', function() {
         .pipe(livereload({
             start: true
         }));
-});
-
+}); 
 
 // 模块化引用html
 gulp.task('insert', function() {
     return gulp.src(Asset.origin.html)
-        .pipe(cache('linting'))
+        .pipe(cache('linting')) 
+
         .pipe(htmlInsert({
             src: "src/html/include/"
         }))
+
+        // .pipe(w3cjs())
+
+        // .pipe(w3cjs.reporter())
+
         .pipe(htmlmin({
             collapseWhitespace: true
         }))
+
         .pipe(gulp.dest('dist/html'))
         .pipe(livereload({
             start: true

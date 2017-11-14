@@ -76,5 +76,5 @@ body {
   -webkit-background-clip: padding-box;
   -moz-background-clip: padding-box;
   background-clip: padding-box;
-  background: url(images/add.png) no-repeat;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAV0lEQVQ4T2NkoBAwUqifgeYGFEBdOAGXSwm5oAGqEUZjmDP4DAD5mR/JnQ5Q9gE0tzfC+OheQPcrNgM+MDAwwAN18IUBejRRJRpR/IxuA6EwIJhVBt4AAAzJDhGJI4ETAAAAAElFTkSuQmCC) no-repeat;
 }
