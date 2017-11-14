@@ -20,6 +20,9 @@
 ## Build Setup
 
 ``` bash
+# install
+npm install gulp-frontend-demo 
+
 # install dependencies
 npm install
 

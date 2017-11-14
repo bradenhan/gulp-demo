@@ -18,7 +18,6 @@ var gulp = require('gulp'),
     cssBase64 = require('gulp-css-base64'),
     eslint = require('gulp-eslint'),
     cache = require('gulp-cached'),
-
     w3cjs = require('gulp-w3cjs');
 
 var Asset = {
