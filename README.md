@@ -2,7 +2,7 @@
 
 > 一个基于gulp的前端框架，包含html模块化压缩、Less支持、JS压缩、清除缓存等功能。
 
-## Directory Structure
+## 目录结构
 ```
  src 
  |__ fonts
@@ -15,6 +15,18 @@
  README.md // 项目说明文件
 
 ```
+
+## HTML模块化
+html的模块代码放置在如下目录中
+```
+ src  
+ ...
+ |__ html 
+    |__include 
+ ...
+```
+在页面中可以做如下直接引用
+>  <!--{{header.html}}-->
 
 
 ## Build Setup
@@ -36,3 +48,4 @@ gulp connectDev
 gulp connectDist 
 
 ```
+
