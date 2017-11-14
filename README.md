@@ -31,7 +31,7 @@ html的模块代码放置在如下目录中
 ```
 
 
-## Build Setup
+## 安装
 
 ``` bash
 # install
