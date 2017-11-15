@@ -17,9 +17,10 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     cssBase64 = require('gulp-css-base64'),
     eslint = require('gulp-eslint'),
-    cache = require('gulp-cached'),
-    w3cjs = require('gulp-w3cjs');
+    w3cjs = require('gulp-w3cjs'),
+    babel = require('gulp-babel');
 
+       
 var Asset = {
     origin: {
         all: 'src/**/*.*',
@@ -42,8 +43,7 @@ var handleError = function(err) {
 
 // less 转换 、压缩 CSS 
 gulp.task('less', function() {
-    return gulp.src(Asset.origin.less)
-        .pipe(cache('linting'))
+    return gulp.src(Asset.origin.less) 
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
@@ -63,15 +63,12 @@ gulp.task('less', function() {
 
 // 模块化引用html
 gulp.task('insert', function() {
-    return gulp.src(Asset.origin.html)
-        .pipe(cache('linting')) 
-
+    return gulp.src(Asset.origin.html) 
         .pipe(htmlInsert({
             src: "src/html/include/"
         }))
 
-        // .pipe(w3cjs())
-
+        // .pipe(w3cjs()) 
         // .pipe(w3cjs.reporter())
 
         .pipe(htmlmin({
@@ -88,7 +85,9 @@ gulp.task('insert', function() {
 gulp.task('lint', function() {
     var srcJsPath = Asset.origin.js;
     gulp.src(srcJsPath)
-        .pipe(cache('linting'))
+        .pipe(babel({
+          presets: ['es2015']
+        })) 
         .pipe(eslint({
             rules: {
                 "no-alert": 0,
