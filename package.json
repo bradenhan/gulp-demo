@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bradenhan/gulp-frontEnd-demo.git"
+    "url": "git+https://github.com/bradenhan/gulp-frontEnd-program.git"
   },
   "author": "bradenhan",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bradenhan/gulp-frontEnd-demo/issues"
+    "url": "https://github.com/bradenhan/gulp-frontEnd-program/issues"
   },
-  "homepage": "https://github.com/bradenhan/gulp-frontEnd-demo#readme",
+  "homepage": "https://github.com/bradenhan/gulp-frontEnd-program#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
