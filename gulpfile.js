@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     watchPath = require('gulp-watch-path'),
     combiner = require('stream-combiner2'),
+    autoprefixer = require('gulp-autoprefixer'),
     less = require('gulp-less'),
     htmlmin = require('gulp-htmlmin'),
     path = require('path'),
@@ -47,6 +48,7 @@ gulp.task('less', function() {
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
+        .pipe(autoprefixer('last 10 versions', 'ie 9')) // https://gist.github.com/gorork/92de3a4316c7c00307a5
         .pipe(cssBase64())
         .pipe(gulp.dest('src/css'))
         .pipe(cleanCSS({
