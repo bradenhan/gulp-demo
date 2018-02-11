@@ -11,7 +11,6 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     htmlmin = require('gulp-htmlmin'),
     path = require('path'),
-    connect = require('gulp-connect'),
     htmlInsert = require('gulp-html-build').htmlInsert,
     htmlRename = require('gulp-html-build').htmlRename,
     spritesmith = require('gulp.spritesmith'),
@@ -171,16 +170,16 @@ gulp.task('browser-sync', function() {
 // 监控
 gulp.task('watch', function() {
     //监控 html
-    gulp.watch(Asset.origin.html, ['insert','change'], reload);
+    gulp.watch(Asset.origin.html, ['insert']).on('change', reload);
 
     //监控js
-    gulp.watch(Asset.origin.js, ['lint', 'watchjs']);
+    gulp.watch(Asset.origin.js, ['lint', 'watchjs']).on('change', reload);
 
     //监控less
-    gulp.watch(Asset.origin.less, ['less']);
+    gulp.watch(Asset.origin.less, ['less']).on('change', reload);
 
     //监控img
-    gulp.watch(Asset.origin.images, ['images']);
+    gulp.watch(Asset.origin.images, ['images']).on('change', reload);
 });
 
 // 编写default任务和监听任务
