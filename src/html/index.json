@@ -1,0 +1,8 @@
+{
+  "title": "首页ss",
+  "styles": [
+  	"//v3.bootcss.com/examples/jumbotron/jumbotron.css",
+  	"../css/less.css"
+  ],
+  "scripts" : ["https://unpkg.com/valine@1.1.9-beta4/dist/Valine.min.js"]
+}
