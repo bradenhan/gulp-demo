@@ -15,13 +15,14 @@ var gulp = require('gulp'),
     htmlInsert = require('gulp-html-build').htmlInsert,
     htmlRename = require('gulp-html-build').htmlRename,
     spritesmith = require('gulp.spritesmith'),
-    livereload = require('gulp-livereload'),
     cssBase64 = require('gulp-css-base64'),
     eslint = require('gulp-eslint'),
     w3cjs = require('gulp-w3cjs'),
-    babel = require('gulp-babel');
+    babel = require('gulp-babel'),
+    browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
 
-       
+
 var Asset = {
     origin: {
         all: 'src/**/*.*',
@@ -42,9 +43,9 @@ var handleError = function(err) {
     gutil.log('plugin: ' + gutil.colors.yellow(err.plugin));
 };
 
-// less 转换 、压缩 CSS 
+// less 转换 、压缩 CSS
 gulp.task('less', function() {
-    return gulp.src(Asset.origin.less) 
+    return gulp.src(Asset.origin.less)
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
@@ -54,33 +55,27 @@ gulp.task('less', function() {
         .pipe(cleanCSS({
             debug: true
         }, function(details) {
-            console.log(details.name + ': ' + details.stats.originalSize);
-            console.log(details.name + ': ' + details.stats.minifiedSize);
+           // console.log(details.name + ': ' + details.stats.originalSize);
+            // console.log(details.name + ': ' + details.stats.minifiedSize);
         }))
         .pipe(gulp.dest('dist/css'))
-        .pipe(livereload({
-            start: true
-        }));
-}); 
+});
 
 // 模块化引用html
 gulp.task('insert', function() {
-    return gulp.src(Asset.origin.html) 
+    return gulp.src(Asset.origin.html)
         .pipe(htmlInsert({
             src: "src/html/include/"
         }))
 
-        // .pipe(w3cjs()) 
+        // .pipe(w3cjs())
         // .pipe(w3cjs.reporter())
 
-        .pipe(htmlmin({
-            collapseWhitespace: true
-        }))
+        //.pipe(htmlmin({
+          //  collapseWhitespace: true
+       // }))
 
         .pipe(gulp.dest('dist/html'))
-        .pipe(livereload({
-            start: true
-        }));
 });
 
 // JS 文件错误检查
@@ -89,17 +84,20 @@ gulp.task('lint', function() {
     gulp.src(srcJsPath)
         .pipe(babel({
           presets: ['es2015']
-        })) 
+        }))
         .pipe(eslint({
+            // rules: {
+            //     "no-alert": 0,
+            //     "no-bitwise": 0,
+            //     "camelcase": 1,
+            //     "curly": 1,
+            //     "eqeqeq": 0,
+            //     "no-eq-null": 0,
+            //     "guard-for-in": 1,
+            //     "no-empty": 1
+            // },
             rules: {
-                "no-alert": 0,
-                "no-bitwise": 0,
-                "camelcase": 1,
-                "curly": 1,
-                "eqeqeq": 0,
-                "no-eq-null": 0,
-                "guard-for-in": 1,
-                "no-empty": 1
+              "no-alert": 0,
             },
             globals: [
                 'jQuery',
@@ -114,15 +112,15 @@ gulp.task('lint', function() {
         .pipe(eslint.formatEach('compact', process.stderr));
 });
 
-// 新建js批量压缩任务  
+// 新建js批量压缩任务
 gulp.task('compress', function(cb) {
-    //将文件的源路径和发布路径赋值给相应变量  
+    //将文件的源路径和发布路径赋值给相应变量
     var srcJsPath = Asset.origin.js;
     var destJsPath = 'dist/js/';
     pump([
-            gulp.src(srcJsPath), //获取文件源地址 
+            gulp.src(srcJsPath), //获取文件源地址
             // uglify(), //执行压缩-暂时不压缩
-            gulp.dest(destJsPath) //将压缩的文件发布到新路径  
+            gulp.dest(destJsPath) //将压缩的文件发布到新路径
         ],
         cb
     );
@@ -133,19 +131,16 @@ gulp.task('images', function() {
     return gulp.src('src/images/*')
         .pipe(imagemin())
         .pipe(gulp.dest('dist/images'))
-        .pipe(livereload({
-            start: true
-        }));
 });
 
 // 编写default任务和监听任务
 gulp.task('watchjs', function() {
     gulp.watch('src/js/*.js', function(event) {
         var paths = watchPath(event, 'src/js/', 'dist/js/');
-        //打印修改类型和路径  
+        //打印修改类型和路径
         gutil.log(gutil.colors.green(event.type) + ' ' + paths.srcPath);
         gutil.log('Dist: ' + paths.distPath);
-        //获取错误信息，继续执行代码  
+        //获取错误信息，继续执行代码
         var combined = combiner.obj([
             gulp.src(paths.srcPath),
             // uglify(),   //执行压缩-暂时不压缩
@@ -162,55 +157,40 @@ gulp.task('watchjs', function() {
 //     cssName: 'sprite.css'
 //   }));
 //   return spriteData.pipe(gulp.dest('dist/css/background/'));
-// });  
+// });
+
+// 代理、静态服务器
+gulp.task('browser-sync', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./dist/"
+        },
+    });
+});
 
 // 监控
 gulp.task('watch', function() {
-    //监控 html  
-    gulp.watch(Asset.origin.all, ['insert']);
+    //监控 html
+    gulp.watch(Asset.origin.html, ['insert','change'], reload);
 
-    //监控js  
+    //监控js
     gulp.watch(Asset.origin.js, ['lint', 'watchjs']);
 
-    //监控less  
+    //监控less
     gulp.watch(Asset.origin.less, ['less']);
 
-    //监控img  
+    //监控img
     gulp.watch(Asset.origin.images, ['images']);
-
-    livereload.listen({
-        start: true
-    });
-});
-
-// 监测正式地址
-gulp.task('connectDev', function() {
-    connect.server({
-        name: 'src App',
-        root: 'src',
-        port: 8000,
-        livereload: true
-    });
-});
-
-// 监测正式地址
-gulp.task('connectDist', function() {
-    connect.server({
-        name: 'Dist App',
-        root: 'dist',
-        port: 8001,
-        livereload: true
-    });
 });
 
 // 编写default任务和监听任务
-gulp.task('default', ['watch', 'connectDist', 'connectDev'], function() {
+gulp.task('default', ['watch', 'browser-sync'], function() {
     return gulp.src('dist/html/*.html')
         .pipe(htmlRename());
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
-//注意src的参数   
+//注意src的参数
 gulp.task('copy', function() {
     var destDir = "";
     return gulp.src('./*', {
