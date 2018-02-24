@@ -1,0 +1,46 @@
+@import "../mixins";
+
+.goodsList{
+  .clearfix();
+  padding: 0 0 20px 5px;
+  .goodsList__item{
+    float: left;
+    overflow: hidden;
+    width: 160px;
+    margin: 15px 23px 0 15px;
+    background: #f8f8f8;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+
+  .goodsList__pic-wrap{
+    display: block;
+    width: 160px;
+    height: 120px;
+  }
+
+  .goodsList__title{
+    display: block;
+    height: 20px;
+    margin: 5px 0 0;
+    line-height: 20px;
+    text-align: center;
+    .line-overflow(1);
+  }
+
+  .goodsList__price{
+    color: #f33;
+    &:before{
+      content: '¥';
+      color: #f33;
+    }
+  }
+
+  .goodsList__toolbar{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    .goodsList__buy{
+      color: #f33;
+    }
+  }
+}

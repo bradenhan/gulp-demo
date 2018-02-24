@@ -1,0 +1,193 @@
+{
+  "title": "列表页",
+  "styles": [
+    "https://cdn.bootcss.com/bxslider/4.2.12/jquery.bxslider.min.css",
+    "../css/list.css"
+  ],
+  "scripts": [],
+  "relatedCases": {
+    "flag": true,
+    "data": [{
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      }, {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      },
+      {
+        "link": "detail.html",
+        "src": "http://active.zol.com.cn/09active/front_end/images/photo.jpg",
+        "title": "筛沙机视频 50L筛沙机工作视频展",
+        "more": "#",
+        "parameters": [{
+            "label": "生产能力：",
+            "value": "100-120"
+          },
+          {
+            "label": "设备配置：",
+            "value": "筛沙机视频 50L筛沙机工作视频展示..."
+          }
+        ]
+      }
+    ]
+  }
+
+
+}

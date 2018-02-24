@@ -1,36 +1,138 @@
-<%- include('global/head') %> 
-<body>
-  
-  <%- include('partial/header') %>
+<%- include('global/head') %>
 
-  <%- include('partial/jumbotron') %>
+  <body>
+    <%- include('partial/header') %>
+      <%- include('global/navBar') %>
+        <div class="wrapper">
+          <div class="main">
+            <div class="section swiper-section">
+              <div class="section__header">
+                <a href="#" class="section__more">更多</a>
+                <h3 class="section__title">图片展示</h3>
+              </div>
+              <div class="section__content">
+                <%- include('partial/bxslider') %>
+              </div>
+            </div>
+          </div>
+          <div class="aside">
+            <div class="section contact-section">
+              <div class="section__header">
+                <a href="#" class="section__more">更多</a>
+                <h3 class="section__title">联系我们</h3>
+              </div>
+              <div class="section__content">
+                <%- include('partial/contact') %>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
-      </div>
-    </div>
-    <hr>
+        <div class="wrapper">
+          <div class="section goodsList-section">
+            <div class="section__header">
+              <a href="#" class="section__more">更多</a>
+              <h3 class="section__title">产品展示</h3>
+            </div>
+            <div class="section__content">
+              <%- include('partial/goodsList') %>
+            </div>
+          </div>
+          <%- include('partial/guarantee') %>
+        </div>
 
+        <div class="wrapper wrapper-news">
+          <div class="section">
+            <div class="section__header">
+              <a href="#" class="section__more">更多</a>
+              <h3 class="section__title">企业新闻</h3>
+            </div>
+            <div class="section__content">
+              <% if(local.enterpriseNews.flag){ %>
+               <ul class="news-list">
+                  <% for(let i = 0; i < local.enterpriseNews.data.length; i++){ %>
+                    <li>
+                      <a href="<%= local.enterpriseNews.data[i].link %>"><%= local.enterpriseNews.data[i].text %></a>
+                    </li>
+                  <% } %>
+               </ul>
+               <% } %>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section__header">
+              <a href="#" class="section__more">更多</a>
+              <h3 class="section__title">行业新闻</h3>
+            </div>
+            <div class="section__content">
+              <% if(local.enterpriseNews.flag){ %>
+               <ul class="news-list">
+                  <% for(let i = 0; i < local.enterpriseNews.data.length; i++){ %>
+                    <li>
+                      <a href="<%= local.enterpriseNews.data[i].link %>"><%= local.enterpriseNews.data[i].text %></a>
+                    </li>
+                  <% } %>
+               </ul>
+               <% } %>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section__header">
+              <a href="#" class="section__more">更多</a>
+              <h3 class="section__title">技术资料</h3>
+            </div>
+            <div class="section__content">
+              <% if(local.enterpriseNews.flag){ %>
+               <ul class="news-list">
+                  <% for(let i = 0; i < local.enterpriseNews.data.length; i++){ %>
+                    <li>
+                      <a href="<%= local.enterpriseNews.data[i].link %>"><%= local.enterpriseNews.data[i].text %></a>
+                    </li>
+                  <% } %>
+               </ul>
+               <% } %>
+            </div>
+          </div>
+        </div>
 
-    <%- include('partial/footer') %>
-  </div>
+        <div class="wrapper wrapper-companion">
+          <% if(local.companion.flag){ %>
+              <% for(let i = 0; i < local.companion.data.length; i++){ %>
+                  <a href="<%= local.companion.data[i].link %>"><img src="<%= local.companion.data[i].src %>" alt=""></a>
+              <% } %>
+           <% } %>
+        </div>
 
-  <%- include('global/foot') %>
+        <div class="wrapper wrapper-case">
+          <div class="case__header">
+            <a href="#" class="case__more">更多</a>
+            <h3 class="case__title">客户案例</h3>
+          </div>
+          <% if(local.relatedCases.flag){ %>
+            <ul class="caseList">
+              <% for(let i = 0; i < local.relatedCases.data.length; i++){ %>
+                  <li class="caseList__item">
+                    <a class="caseList__pic" href="<%= local.relatedCases.data[i].link %>">
+                      <img src="<%= local.relatedCases.data[i].src %>" alt="">
+                    </a>
+                    <a href="<%= local.relatedCases.data[i].link %>" class="caseList__title">
+                      <%= local.relatedCases.data[i].title %>
+                    </a>
+                    <ul>
+                      <% for(let j = 0; j < local.relatedCases.data[i].parameters.length; j++){ %>
+                        <li>
+                          <em><%= local.relatedCases.data[i].parameters[j].label %></em> <%= local.relatedCases.data[i].parameters[j].value %>
+                        </li>
+                      <% } %>
+                    </ul>
+                    <a href="<%= local.relatedCases.data[i].link %>">查看详情</a>
+                  </li>
+              <% } %>
+            </ul>
+           <% } %>
+        </div>
 
-</body>
+        <%- include('partial/footer') %>
+        <%- include('global/foot') %>
+  </body>
 </html>

@@ -1,10 +1,33 @@
 {
-    "site": "gulp-ejs-demo",
+    "site": "glup",
     "styles": [
-        "//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
+        "../css/reset.css",
+        "../css/global.css"
     ],
     "scripts": [
-        "//cdn.bootcss.com/jquery/1.11.3/jquery.min.js",
-        "//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"
-    ]
+       "../js/ejs.min.js",
+        "http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"
+    ],
+    "navBar" : {
+      "navBarLinks" : [{
+        "linkText" : "公司首页",
+        "link" : "index.html"
+      },
+      {
+        "linkText" : "关于我们",
+        "link" : "connect.html"
+      },
+      {
+        "linkText" : "产品中心",
+        "link" : "list.html"
+      },
+      {
+        "linkText" : "售后服务",
+        "link" : "#"
+      },
+      {
+        "linkText" : "联系我们",
+        "link" : "#"
+      }]
+    }
 }

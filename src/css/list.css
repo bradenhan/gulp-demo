@@ -1,0 +1,148 @@
+.caseList {
+  zoom: 1;
+}
+.caseList:before {
+  content: '';
+  display: block;
+}
+.caseList:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.caseList .caseList__item {
+  zoom: 1;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ebebeb;
+}
+.caseList .caseList__item:before {
+  content: '';
+  display: block;
+}
+.caseList .caseList__item:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.caseList .caseList__item:last-child {
+  margin-right: 0;
+  border-right: 0 none;
+}
+.caseList .caseList__pic {
+  float: left;
+  width: 160px;
+  height: 120px;
+  margin: 0 10px 0 0;
+}
+.caseList .caseList__title {
+  display: block;
+  height: 22px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: bold;
+}
+.caseList .caseList__title + ul {
+  overflow: hidden;
+  margin: 10px 0 0;
+  color: #999;
+  line-height: 22px;
+}
+.caseList .caseList__title + ul em {
+  color: #666;
+}
+.caseList .caseList__title + ul + a {
+  float: left;
+  margin: 10px 0 0;
+}
+/* page-box */
+.page-box {
+  margin: 30px 0 0;
+  font: normal 14px/34px 'Microsoft YaHei', '\5FAE\8F6F\96C5\9ED1';
+  text-align: center;
+}
+.page-box .button {
+  display: inline-block;
+  height: 34px;
+  margin: 0 0 0 13px;
+  padding: 0 10px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #e9e9e9;
+  cursor: pointer;
+}
+.page-box .button:hover {
+  border-color: #f30;
+  color: #f30;
+  text-decoration: none;
+}
+.page-box .jump-page {
+  display: inline-block;
+  margin: 0 0 0 13px;
+}
+.page-box .jump-page input {
+  display: inline-block;
+  width: 44px;
+  height: 14px;
+  margin: 0 8px;
+  padding: 10px 0;
+  border: 1px solid #e9e9e9;
+  line-height: 14px;
+  text-align: center;
+}
+.page-box .page-num {
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+.page-box .pager {
+  display: inline-block;
+}
+.page-box .pager li {
+  display: inline-block;
+  margin: 0 5px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #e9e9e9;
+  background: #fff;
+}
+.page-box .pager li:hover {
+  border-color: #f30;
+  color: #f30;
+  text-decoration: none;
+}
+.page-box .pager li a,
+.page-box .pager li span {
+  display: block;
+  padding: 0 14px;
+}
+.page-box .pager li a:hover {
+  text-decoration: none;
+}
+.page-box .pager .selected,
+.page-box .pager .selected:hover {
+  border-color: #f30;
+  background: #f30;
+  color: #fff;
+  text-decoration: none;
+}
+.page-box .pager .selected a,
+.page-box .pager .selected:hover a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+.page-box .pager .disabled,
+.page-box .pager .disabled:hover {
+  border: 1px solid #e9e9e9;
+  color: #999;
+  cursor: text;
+  text-decoration: none;
+}
+.page-box .pager .more {
+  float: left;
+  line-height: 36px;
+}

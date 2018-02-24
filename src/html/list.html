@@ -1,0 +1,43 @@
+<%- include('global/head') %>
+
+  <body>
+
+    <%- include('partial/header') %>
+
+    <%- include('global/navBar') %>
+
+    <div class="wrapper">
+      <% if(local.relatedCases.flag){ %>
+        <ul class="caseList">
+          <% for(let i = 0; i < local.relatedCases.data.length; i++){ %>
+              <li class="caseList__item">
+                <a class="caseList__pic" href="<%= local.relatedCases.data[i].link %>">
+                  <img src="<%= local.relatedCases.data[i].src %>" alt="">
+                </a>
+                <a href="<%= local.relatedCases.data[i].link %>" class="caseList__title">
+                  <%= local.relatedCases.data[i].title %>
+                </a>
+                <ul>
+                  <% for(let j = 0; j < local.relatedCases.data[i].parameters.length; j++){ %>
+                    <li>
+                      <em><%= local.relatedCases.data[i].parameters[j].label %></em> <%= local.relatedCases.data[i].parameters[j].value %>
+                    </li>
+                  <% } %>
+                </ul>
+                <a href="<%= local.relatedCases.data[i].link %>">查看详情</a>
+              </li>
+          <% } %>
+        </ul>
+       <% } %>
+
+       <%- include('partial/page') %>
+    </div>
+
+    <%- include('partial/footer') %>
+
+    <%- include('global/foot') %>
+
+
+  </body>
+
+  </html>

@@ -1,73 +1,18 @@
-# gulp-frontend-program
+# gulp-ejs-demo
+gulp+ejs 合并静态页模版，文件更新自动热重载。
 
-## 项目缘起
-懒 <br />
-懒得复制CSS、html<br />
-懒得写一堆CSS前缀<br />
-。。。。<br />
-总之一堆懒<br />
+* `npm install`  安装依赖
+* `gulp` 启动一个自动热重载的服务器，默认端口3000
 
-所以，就有了这个很简单的项目（高手请直接略过！！！！）<br />
+## 流程
 
-这是一个基于gulp的前端项目，
-包含
-* 新建代码着色与错误日志显示
-* html检查、模块化、压缩
-* Less转换 、压缩
-* JS检查、压缩 
-* 图片压缩
-* CSS sprite （待完善）
-* 本地浏览器自动刷新
-<br />
-等功能  
+1. 模板编码，即 `templates/` 目录，页面入口以 `.html` 结尾，分支模版以 `.ejs` 结尾，没有目录结构限制，按需引入或编写新的页面模块。在这个阶段可以启动服务器 `gulp dev` 进行实时页面预览。
 
-## HTML模块化
-html的模块代码放置在如下目录中
-```
- src  
- ...
- |__ html 
-    |__include(请不要随意修改此文件名，否则会报错) 
- ...
-```
-在页面中可以做如下直接引用
-```
-<!-- {{header.html}} -->
-```
+2. 编写数据文件，分为全局数据文件 `global.json` 和页面数据文件，使用通用的 `json` 格式。全局数据文件必须放到模版根目录，一个页面对应一个同名的数据文件同级目录。数据中可以写，比如： `title：页面标题` 、`styles：依赖的样式文件路径`、 `scripts：依赖的脚本文件路径` ，随时可以根据实际情况添加新的数据项。
 
-## LESS/CSS自动补全
-样式表自动补全采用 [mixinsless](http://mixinsless.com/ "mixinsless") ，感恩！  
-## 目录结构
-```
- src 
- |__ fonts
- |__ html 
-    |__include // 公共部分，可以页面中引用
- |__ less
- |__ js 
- gulpfile.js // Gulp主文件
- package.json // 配置文件
- README.md // 项目说明文件
+3. 执行 `gulp ejs` 任务，生成页面到 `html/` 目录，如果之前启动了热重载服务器不需要这一步。
 
-```
 
-## 安装
+## 其他
 
-``` bash
-# install
-npm i gulp-frontend-program
-
-# install dependencies
-npm install (尽量不要使用cnpm安装)
-
-# start program
-gulp
-
-# serve start dev localhost:8000
-gulp connectDev
-
-# serve start dist localhost:8001
-gulp connectDist 
-
-```
-
+实际工作中肯定还会搭配其他任务一起运行，比如：css 和 js 相关任务。此 Demo 中省略，可根据各自项目情况自行更改。

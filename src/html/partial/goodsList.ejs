@@ -1,0 +1,19 @@
+<ul class="goodsList">
+  <% if(local.listData) {%>
+    <% for (var i=0; i<local.listData.data1.length; i++){ %>
+      <li class="goodsList__item">
+          <a href="<%= local.listData.data1[i].link %>" class="goodsList__pic-wrap">
+            <img src="<%= local.listData.data1[i].src %>" alt="">
+          </a>
+          <a href="<%= local.listData.data1[i].link %>" class="goodsList__title"><%= local.listData.data1[i].title %></a>
+          <div class="goodsList__toolbar">
+            <span class="goodsList__price"><%= local.listData.data1[i].price %></span>
+            <a class="goodsList__buy" href="<%= local.listData.data1[i].link %>">
+              <%= local.listData.data1[i].buy.text %>
+            </a>
+          </div>
+
+      </li>
+    <% } %>
+  <% } %>
+</ul>

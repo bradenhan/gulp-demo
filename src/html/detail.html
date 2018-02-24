@@ -1,0 +1,45 @@
+<%- include('global/head') %>
+
+<body>
+    <%- include('partial/header') %>
+      <%- include('global/navBar') %>
+      <div class="wrapper">
+        <div class="swiper-wrap">
+          <%- include('partial/swiper') %>
+        </div>
+        <div class="swiper-aside">
+          <div class="detail">
+             <strong class="detail__title"><%= local.swiperData.title %></strong>
+             <ul class="detail__parameter">
+               <% for(let i = 0; i < local.swiperData.parameter.length; i++ ) {%>
+               <li><strong><%= local.swiperData.parameter[i].label %></strong><%= local.swiperData.parameter[i].value %></li>
+               <% } %>
+             </ul>
+             <ul class="detail__recommend">
+               <% for(let i = 0; i < local.swiperData.recommend.length; i++ ) {%>
+               <li>
+                 <a href="<%= local.swiperData.recommend[i].link %>">
+                   <img src="<%= local.swiperData.recommend[i].src %>" alt="">
+                   <span><%= local.swiperData.recommend[i].name %></span>
+                 </a>
+               </li>
+               <% } %>
+             </ul>
+             <dl>
+               <dt>24小时电话：</dt><dd>156 11111 111</dd>
+             </dl>
+             <div class="detail__connect">
+               <a href="#"><img width="200" height="40" title="直接获取报价" alt="直接获取报价" src="http://www.shaishaji.com.cn/templets/default/images/msg.jpg" border="0"></a>
+               <a href="#"><img width="200" height="40" title="设备问题咨询" alt="设备问题咨询" src="http://www.shaishaji.com.cn/templets/default/images/order.gif" border="0"></a>
+             </div>
+           </div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+          <%- include('partial/message') %>
+      </div>
+      <%- include('partial/footer') %>
+      <%- include('global/foot') %>
+  </body>
+</html>

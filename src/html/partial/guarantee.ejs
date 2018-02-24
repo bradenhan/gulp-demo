@@ -1,0 +1,11 @@
+<% if(local.guarantee.flag){ %>
+  <ul class="guaranteeList">
+    <% for (let i = 0; i < local.guarantee.data.length; i++){ %>
+    <li class="guaranteeList__item guaranteeList__item<%=i %>">
+      <i class="guaranteeList__icon <%= local.guarantee.data[i].iconClass %>">s</i>
+      <strong><%= local.guarantee.data[i].name %></strong>
+      <p><%= local.guarantee.data[i].text %></p>
+    </li>
+    <% } %>
+  </ul>
+<% } %>

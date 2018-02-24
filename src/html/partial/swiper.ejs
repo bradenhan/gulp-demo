@@ -1,0 +1,20 @@
+<!-- Swiper -->
+<% if(local.swiperData.flag){ %>
+<div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+      <% for(let i=0; i < local.swiperData.mainPic.length; i++){ %>
+       <div class="swiper-slide" style="background-image:url(<%= local.swiperData.mainPic[i] %>)"></div>
+      <% } %>
+    </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next swiper-button-white"></div>
+    <div class="swiper-button-prev swiper-button-white"></div>
+</div>
+<div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+      <% for(let i=0; i < local.swiperData.thumbsPic.length; i++){ %>
+       <div class="swiper-slide" style="background-image:url(<%= local.swiperData.thumbsPic[i] %>)"></div>
+      <% } %>
+    </div>
+</div>
+<% } %>

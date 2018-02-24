@@ -1,0 +1,10 @@
+<% if(local.contact){ %>
+  <div class="contact">
+    <span class="contact__pic"><img src="<%= local.contact.pic.src %>" alt=""></span>
+    <ul class="contact__text">
+      <% for(let i = 0; i < local.contact.text.length; i++) { %>
+      <li class="contact__item"><span><%= local.contact.text[i].label %></span><%= local.contact.text[i].value %></li>
+      <% } %>
+    </ul>
+  </div>
+<% } %>

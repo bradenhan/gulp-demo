@@ -18,7 +18,7 @@ var fs = require('fs'),
     cssBase64 = require('gulp-css-base64'),
     less = require('gulp-less'),
 
-    // js处理 
+    // js处理
     // 安装babel npm install --save-dev gulp-babel babel-core babel-preset-env
     watchPath = require('gulp-watch-path'),
     combiner = require('stream-combiner2'),
@@ -32,17 +32,17 @@ var fs = require('fs'),
 
     //本地服务器
     browserSync = require('browser-sync'),
-    reload = browserSync.reload; 
+    reload = browserSync.reload;
 
 var Asset = {
     origin: {
-        all: 'src/**/*.*', 
+        all: 'src/**/*.*',
         tplDir: './src/html', // 模版目录
         distDir: './dist/html',  // 生成目录
-        less: ['src/less/*.less', 'src/less/*/*.less'],
+        less: ['src/less/*.less', 'src/less/**/*.less'],
         js: 'src/js/*.js',
         css: 'src/css/*.css',
-        images: 'src/images/*.*', 
+        images: 'src/images/*.*',
         distImages: 'dist/images'
     }
 };
@@ -67,19 +67,19 @@ gulp.task('ejs', function(){
             return Object.assign(JSON.parse(fs.readFileSync(Asset.origin.tplDir + '/global.json')), {
                 // local: 每个页面对应的数据，页面中通过 local.属性 调用
                 local: JSON.parse(fs.readFileSync( path.join(path.dirname(filePath), path.basename(filePath, '.html') + '.json')))
-            }) 
+            })
         }))
         .pipe(ejs().on('error', function(err) {
             gutil.log(err);
             this.emit('end');
         }))
 
-        .pipe(w3cjs()) 
-        .pipe(w3cjs.reporter())
+      //  .pipe(w3cjs())
+      //  .pipe(w3cjs.reporter())
 
-        .pipe(htmlmin({
-           collapseWhitespace: true
-        }))
+      //  .pipe(htmlmin({
+      //     collapseWhitespace: true
+      //  }))
 
         .pipe(gulp.dest(Asset.origin.distDir));
 });
@@ -132,7 +132,7 @@ gulp.task('imagemin', function() {
 });
 
 // 监控
-gulp.task('watch', function() { 
+gulp.task('watch', function() {
     //监控less
     gulp.watch(Asset.origin.less, ['less']).on('change', reload);
 
@@ -153,25 +153,25 @@ gulp.task('watch', function() {
 //     cssName: 'sprite.css'
 //   }));
 //   return spriteData.pipe(gulp.dest('dist/css/background/'));
-// });  
+// });
 
 // 开发服务
 gulp.task('dev', function() {
     browserSync.init({
         server: {
-            baseDir: './dist/html/'
+            baseDir: './dist/'
         },
         reloadDebounce: 0
-    }); 
+    });
 });
 
 // 编写default任务和监听任务
-gulp.task('default', ['watch', 'dev'], function() {
-     
+gulp.task('default', ['watch','ejs-watch','dev'], function() {
+
 });
 
 // 将本文件夹下的文件发布到其他盘 暂时不准确
-//注意src的参数   
+//注意src的参数
 gulp.task('copy', function() {
     var destDir = "";
     return gulp.src('./*', {

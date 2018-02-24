@@ -1,0 +1,15 @@
+.swiperWrap {
+  position: relative;
+  width: 900px;
+  height: 400px;
+  overflow: hidden;
+  background: #fff;
+}
+.swiperWrap .bx-wrapper {
+  width: 900px;
+  height: 100%;
+  margin: 0;
+  border: 0 none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
