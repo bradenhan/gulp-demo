@@ -1,8 +1,0 @@
-{
-  "title": "详情页",
-  "styles": [
-    "https://cdn.bootcss.com/Swiper/4.1.0/css/swiper.min.css",
-  	"../css/detail.css"
-  ],
-  "scripts" : []
-}
